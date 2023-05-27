@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\BooksFormRequest;
+use App\Models\Books;
+use Illuminate\Http\Request;
+
+class BooksController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // busca todos os usuarios
+
+        $books = Books::with('genres')->get()->sortBy('name');
+
+        return $books;
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(BooksFormRequest $request)
+    {
+        // cria novo usuario
+
+        $books = Books::create($request->all());
+        return $books;
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        // returna um usuario
+
+        $books = Books::findOrFail($id);
+        return $books;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // atualiza um usuario
+
+        $books = Books::findOrFail($id);
+
+        $books->fill($request->all());
+
+        $books->save();
+
+        return $books;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        // apaga um usuario com frag no banco
+
+        $books = Books::findOrFail($id);
+
+        $books->deleted = 1;
+
+        $books->save();
+
+        return $books;
+
+    }
+}
