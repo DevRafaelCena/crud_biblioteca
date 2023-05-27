@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BooksFormRequest;
 use App\Models\Books;
+use App\Models\Loans;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -18,6 +19,23 @@ class BooksController extends Controller
         // busca todos os usuarios
 
         $books = Books::with('genres')->get()->sortBy('name');
+
+
+        foreach ($books as $book) {
+            // verifica se livro está emprestado.
+
+            $bookAvailable = Loans::where('book_id', $book->id)->where('date_returned', null)->first();
+
+            if($bookAvailable){
+                $book->available = false;
+                $book->return_due_date = $bookAvailable->return_due_date;
+
+            }else{
+                $book->available = true;
+            }
+
+
+        }
 
         return $books;
 

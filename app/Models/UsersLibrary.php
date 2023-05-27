@@ -9,4 +9,9 @@ class UsersLibrary extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'email'];
+
+    public function loans()
+    {
+        return $this->hasMany(Loans::class);
+    }
 }

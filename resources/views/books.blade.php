@@ -146,15 +146,44 @@
 
             $.each(response, function(index, book) {
                 let editarBtn = '<button class="btn btn-primary btn-editar-usuario" onClick="abrirModalEdicao(' + book.id + ')"><i class="fas fa-pencil-alt"></i></button>';
-                let excluirBtn = '<button class="btn btn-danger btn-excluir-usuario" data-id="' + book.id + '" onclick="excluirUsuario(' + book.id + ')"><i class="fas fa-trash"></i></button>';
+                let excluirBtn = '<button class="btn btn-danger btn-excluir-usuario" data-id="' + book.id + '" onclick="excluirLivro(' + book.id + ')"><i class="fas fa-trash"></i></button>';
+                let devolverBtn = '<button class="btn btn-warning btn-devolver-livro" data-id="' + book.id + '" onclick="devolverLivro(' + book.id + ')"><i class="fas fa-undo"></i></button>';
+
+                if(book.deleted){
+                    actions = ''
+                    status = '<strong style="color: red" >Excluído</strong>'
+                }else{
+
+                    if(!book.available){
+                        let now = new Date();
+                        let date = new Date(book.return_due_date);
+
+                        // verifica se esta atrasado
+
+                        if(date < now){
+                            status = '<strong style="color: red" >Atrasado</strong>'
+
+                        }else{
+                            status = '<strong style="color: gray" >Emprestado</strong>'
+                        }
+
+
+                        actions = editarBtn + ' ' + devolverBtn;
+
+                    }else{
+                        status = '<strong style="color: green" >Disponível</strong>'
+                        actions = editarBtn + ' ' + excluirBtn;
+                    }
+
+                }
 
                 table.row.add([
                     book.id,
                     book.title,
                     book.author,
                     book.genres.name,
-                    book.status ? 'Disponível' : 'Indisponível',
-                    editarBtn + ' ' + excluirBtn
+                    status,
+                    actions
                 ]).draw(false);
             });
             },
@@ -235,17 +264,19 @@
 
     // Evento de clique para salvar a edição do usuário
     $('#salvarEdicaoBtn').on('click', function() {
-      var usuarioId = $('#usuarioId').val();
-      var name = $('#nomeCompletoEdit').val();
-      var email = $('#emailEdit').val();
+      var bookId = $('#bookId').val();
+      var title = $('#tituloEdit').val();
+      var author = $('#autorEdit').val();
+      var genre = $('#selectGenresEdit').val();
 
       var data = {
-        name: name,
-        email: email
+        title,
+        author,
+        genre_id: genre
       };
 
       $.ajax({
-        url: 'api/user-library/' + usuarioId,
+        url: 'api/books/' + bookId,
         method: 'PUT',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -257,11 +288,10 @@
 
           // Fechar o modal após a edição bem-sucedida
             $('#edicaoModal').modal('hide');
-            $('#usuarioId').val('');
-            $('#nomeCompletoEdit').val('');
-            $('#emailEdit').val('');
-            $('#numeroCadastroEdit').val('');
-            findUsers();
+            $('#bookId').val('');
+            $('#tituloEdit').val('');
+            $('#autorEdit').val('');
+            findBooks();
         },
 
         error: function(xhr, status, error) {
@@ -270,11 +300,11 @@
     });
 });
 
-function excluirUsuario(userId) {
+function excluirLivro(bookId) {
   // Exibir um diálogo de confirmação usando o SweetAlert2
   Swal.fire({
     title: 'Tem certeza?',
-    text: 'Esta ação irá excluir o usuário permanentemente.',
+    text: 'Esta ação irá excluir o livro permanentemente.',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -285,24 +315,65 @@ function excluirUsuario(userId) {
     if (result.isConfirmed) {
       // Solicitar exclusão via AJAX
       $.ajax({
-        url: 'api/user-library/' + userId,
+        url: 'api/books/' + bookId,
         method: 'DELETE',
         success: function(response) {
           // Exibir mensagem de sucesso
           Swal.fire({
-            title: 'Usuário excluído!',
-            text: 'O usuário foi excluído com sucesso.',
+            title: 'Livro excluído!',
+            text: 'O Livro foi excluído com sucesso.',
             icon: 'success'
           });
 
           // Atualizar a tabela de usuários
-           findUsers();
+          findBooks();
         },
         error: function() {
           // Exibir mensagem de erro
           Swal.fire({
             title: 'Erro!',
-            text: 'Ocorreu um erro ao excluir o usuário.',
+            text: 'Ocorreu um erro ao excluir o livro.',
+            icon: 'error'
+          });
+        }
+      });
+    }
+  });
+}
+
+function devolverLivro(bookId) {
+  // Exibir um diálogo de confirmação usando o SweetAlert2
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Esta ação irá devolver o livro.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim, devolver',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Solicitar exclusão via AJAX
+      $.ajax({
+        url: 'api/loans/' + bookId,
+        method: 'PUT',
+        success: function(response) {
+          // Exibir mensagem de sucesso
+          Swal.fire({
+            title: 'Livro devolvido!',
+            text: 'O Livro foi devolvido com sucesso.',
+            icon: 'success'
+          });
+
+          // Atualizar a tabela de usuários
+          findBooks();
+        },
+        error: function() {
+          // Exibir mensagem de erro
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao excluir o livro.',
             icon: 'error'
           });
         }
@@ -312,7 +383,8 @@ function excluirUsuario(userId) {
 }
 
 window.abrirModalEdicao = abrirModalEdicao;
-window.excluirUsuario = excluirUsuario;
+window.excluirLivro = excluirLivro;
+window.devolverLivro = devolverLivro;
 });
 
 
