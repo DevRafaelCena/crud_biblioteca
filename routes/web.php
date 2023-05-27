@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 Route::get('/usuarios', function(){
     return view('user');
-});
+})->name('usuarios');
 
 Route::get('/livros', function(){
 
@@ -30,4 +30,4 @@ Route::get('/livros', function(){
 
 
     return view('books' , ['genres' => $genres]);
-});
+})->name('livros');

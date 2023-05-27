@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários da biblioteca</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<x-layout title="Cadastro de Usuários">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-</head>
-<body>
-
-<div class="container mt-5">
-    <h2>Cadastro de Usuários</h2>
     <button  style="margin-bottom: 3%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal">Novo</button>
-
 
     <table id="tbl_usuarios" class="table table-striped mt-4 text-center" >
       <thead class="thead-dark">
@@ -247,53 +229,52 @@
     });
 });
 
-function excluirUsuario(userId) {
-  // Exibir um diálogo de confirmação usando o SweetAlert2
-  Swal.fire({
-    title: 'Tem certeza?',
-    text: 'Esta ação irá excluir o usuário permanentemente.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sim, excluir',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Solicitar exclusão via AJAX
-      $.ajax({
-        url: 'api/user-library/' + userId,
-        method: 'DELETE',
-        success: function(response) {
-          // Exibir mensagem de sucesso
-          Swal.fire({
-            title: 'Usuário excluído!',
-            text: 'O usuário foi excluído com sucesso.',
-            icon: 'success'
-          });
+    function excluirUsuario(userId) {
+    // Exibir um diálogo de confirmação usando o SweetAlert2
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: 'Esta ação irá excluir o usuário permanentemente.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        // Solicitar exclusão via AJAX
+        $.ajax({
+            url: 'api/user-library/' + userId,
+            method: 'DELETE',
+            success: function(response) {
+            // Exibir mensagem de sucesso
+            Swal.fire({
+                title: 'Usuário excluído!',
+                text: 'O usuário foi excluído com sucesso.',
+                icon: 'success'
+            });
 
-          // Atualizar a tabela de usuários
-           findUsers();
-        },
-        error: function() {
-          // Exibir mensagem de erro
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Ocorreu um erro ao excluir o usuário.',
-            icon: 'error'
-          });
+            // Atualizar a tabela de usuários
+            findUsers();
+            },
+            error: function() {
+            // Exibir mensagem de erro
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao excluir o usuário.',
+                icon: 'error'
+            });
+            }
+        });
         }
-      });
+    });
     }
-  });
-}
 
-window.abrirModalEdicao = abrirModalEdicao;
-window.excluirUsuario = excluirUsuario;
+    window.abrirModalEdicao = abrirModalEdicao;
+    window.excluirUsuario = excluirUsuario;
 });
 
 
-  </script>
+</script>
 
-</body>
-</html>
+</x-layout>

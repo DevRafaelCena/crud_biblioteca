@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livros da biblioteca</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<x-layout title="Cadastro de Livros">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-</head>
-<body>
-
-<div class="container mt-5">
-    <h2>Cadastro de Livros</h2>
     <button  style="margin-bottom: 3%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cadastroModal">Novo</button>
-
 
     <table id="tbl_books" class="table table-striped mt-4 text-center" >
       <thead class="thead-dark">
@@ -148,6 +130,7 @@
                 let editarBtn = '<button class="btn btn-primary btn-editar-usuario" onClick="abrirModalEdicao(' + book.id + ')"><i class="fas fa-pencil-alt"></i></button>';
                 let excluirBtn = '<button class="btn btn-danger btn-excluir-usuario" data-id="' + book.id + '" onclick="excluirLivro(' + book.id + ')"><i class="fas fa-trash"></i></button>';
                 let devolverBtn = '<button class="btn btn-warning btn-devolver-livro" data-id="' + book.id + '" onclick="devolverLivro(' + book.id + ')"><i class="fas fa-undo"></i></button>';
+                let emprestarBtn = '<button class="btn btn-success btn-emprestar-livro" data-id="' + book.id + '" onclick="emprestarLivro(' + book.id + ')"><i class="fas fa-handshake"></i></button>';
 
                 if(book.deleted){
                     actions = ''
@@ -172,7 +155,7 @@
 
                     }else{
                         status = '<strong style="color: green" >Disponível</strong>'
-                        actions = editarBtn + ' ' + excluirBtn;
+                        actions = emprestarBtn + ' ' +editarBtn + ' ' + excluirBtn;
                     }
 
                 }
@@ -390,5 +373,5 @@ window.devolverLivro = devolverLivro;
 
   </script>
 
-</body>
-</html>
+
+</x-layout>
