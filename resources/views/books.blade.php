@@ -105,16 +105,56 @@
   </div>
 </div>
 
+<!-- Modal emprestar livro-->
+<div class="modal fade" id="emprestarLivroModal" tabindex="-1" role="dialog" aria-labelledby="emprestarLivroModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emprestarLivroModalLabel">Empréstimo de Livro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="emprestarLivroForm">
+                    <input type="hidden" id="bookIdEmprestimo">
+
+                    <div class="form-group">
+                        <label for="usuario">Pesquise o Usuário</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="usuario" placeholder="Buscar usuário" autocomplete="off">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                        </div>
+                        <div id="resultadoUsuarios"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataDevolucao">Data de Devolução</label>
+                        <input type="date" class="form-control" id="dataDevolucao">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" id="emprestarLivroBtn" class="btn btn-primary" onclick="emprestarLivro()">Emprestar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    $(document).ready(function() {
-      $('#tbl_books').DataTable({
-        language: {
-          url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
-        },
-      });
+
+$(document).ready(function() {
+    $('#tbl_books').DataTable({
+    language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
+    },
+    });
 
         function findBooks(){
             $.ajax({
@@ -130,7 +170,7 @@
                 let editarBtn = '<button class="btn btn-primary btn-editar-usuario" onClick="abrirModalEdicao(' + book.id + ')"><i class="fas fa-pencil-alt"></i></button>';
                 let excluirBtn = '<button class="btn btn-danger btn-excluir-usuario" data-id="' + book.id + '" onclick="excluirLivro(' + book.id + ')"><i class="fas fa-trash"></i></button>';
                 let devolverBtn = '<button class="btn btn-warning btn-devolver-livro" data-id="' + book.id + '" onclick="devolverLivro(' + book.id + ')"><i class="fas fa-undo"></i></button>';
-                let emprestarBtn = '<button class="btn btn-success btn-emprestar-livro" data-id="' + book.id + '" onclick="emprestarLivro(' + book.id + ')"><i class="fas fa-handshake"></i></button>';
+                let emprestarBtn = '<button class="btn btn-success btn-emprestar-livro"  data-id="' + book.id + '" onclick="abrirModalEmprestarLivro(' + book.id + ')"><i class="fas fa-handshake"></i></button>';
 
                 if(book.deleted){
                     actions = ''
@@ -241,6 +281,14 @@
             }
         })
 
+
+    }
+
+    function abrirModalEmprestarLivro(bookID) {
+
+      $('#bookIdEmprestimo').val(bookID);
+
+      $('#emprestarLivroModal').modal('show');
 
     }
 
@@ -365,9 +413,117 @@ function devolverLivro(bookId) {
   });
 }
 
+
+
+$('#emprestarLivroBtn').on('click', function() {
+      let dataDevolucao = $('#dataDevolucao').val();
+      let usuario = $('#usuario').val();
+      let bookId = $('#bookIdEmprestimo').val();
+
+        let data = {
+            dataDevolucao,
+            usuario,
+            bookId: Number(bookId)
+        };
+
+        console.log(data)
+
+});
+
+
+// Função para realizar a busca de usuários enquanto o usuário digita
+function buscarUsuarios() {
+    var termo = $('#usuario').val();
+
+    // Fazer uma requisição AJAX para a API de busca de usuários
+    $.ajax({
+        url: '/api/user-library/filter/'+ termo, // URL da sua API de busca de usuários
+        method: 'GET',
+        success: function(response) {
+             // Limpa o select existente
+             var selectUsuarios = '<select class="form-control" id="selectUsuarios"><option value="">Selecione um usuário</option>';
+
+            // Iterar pelos resultados e adicionar opções ao select
+            $.each(response, function(index, usuario) {
+                selectUsuarios += '<option value="' + usuario.id + '">' + usuario.name + '</option>';
+            });
+
+            selectUsuarios += '</select>';
+
+            // Atualizar o elemento #resultadoUsuarios com o select de resultados
+            $('#resultadoUsuarios').html(selectUsuarios);
+            $('#resultadoUsuarios').focus();
+            },
+            error: function() {
+            console.log('Erro na chamada AJAX');
+            }
+
+    });
+
+}
+
+
+function emprestarLivro(){
+
+        let dataDevolucao = $('#dataDevolucao').val();
+        let usuario = $('#selectUsuarios').val();
+        let bookId = $('#bookIdEmprestimo').val();
+
+        if(!dataDevolucao || !usuario  || !bookId ){
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Preencha todos os campos.',
+                icon: 'error'
+              });
+              return;
+        }
+
+        let data = {
+            date_return: dataDevolucao,
+            user_id: usuario,
+            book_id: Number(bookId)
+        };
+
+        console.log(data)
+
+        $.ajax({
+            url: '/api/loans',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: data,
+            success: function(response) {
+                // Sucesso, você pode fazer o que quiser com a resposta
+                console.log(response);
+
+                // Fechar o modal após a edição bem-sucedida
+                $('#emprestarLivroModal').modal('hide');
+                $('#dataDevolucao').val('');
+                $('#selectUsuarios').val('');
+                $('#bookIdEmprestimo').val('');
+                findBooks();
+            },
+
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+
+}
+
+
+// Evento para chamar a função buscarUsuarios() enquanto o usuário digita
+$('#usuario').on('input', buscarUsuarios);
+
 window.abrirModalEdicao = abrirModalEdicao;
 window.excluirLivro = excluirLivro;
 window.devolverLivro = devolverLivro;
+window.abrirModalEmprestarLivro = abrirModalEmprestarLivro;
+window.emprestarLivro = emprestarLivro;
+
+
+
 });
 
 

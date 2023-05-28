@@ -161,7 +161,16 @@
         },
         error: function(xhr, status, error) {
           // Erro, trata o erro conforme necessário
-          console.error(error);
+          if(xhr.status == 400) {
+            var errors = xhr.responseJSON.error;
+
+
+            Swal.fire({
+              title: 'Ocorreu um erro!',
+              html: errors,
+              icon: 'error'
+            });
+          }
         }
       });
     });
