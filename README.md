@@ -30,6 +30,12 @@ Copie o arquivo de exemplo do `.env` e edite conforme seu ambiente
    cp .env.example .env
 ```
 
+Gere a chave de criptografia
+
+```bash
+   php artisan key:generate
+```
+
 Execute as migrations
 
 ```bash
