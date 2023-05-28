@@ -30,18 +30,31 @@ class UsersLibraryController extends Controller
      */
     public function filter(Request $request)
     {
-        // Obtém o termo de busca do request
-        $term = $request->term;
 
-        $users = UsersLibrary::where(function ($query) use ($term) {
-            $query->where('name', 'LIKE', '%' . $term . '%')
-                  ->orWhere('email', 'LIKE', '%' . $term . '%')
-                  ->orWhere('id', 'LIKE', '%' . $term . '%');
-        })
-        ->where('deleted', 0)
-        ->get();
+        try{
 
-        return $users;
+             // Obtém o termo de busca do request
+            $term = $request->term;
+
+            if(!$term){
+                return response()->json(['error' => 'Termo de busca não informado'], 400);
+            }
+
+            $users = UsersLibrary::where(function ($query) use ($term) {
+                $query->where('name', 'LIKE', '%' . $term . '%')
+                    ->orWhere('email', 'LIKE', '%' . $term . '%')
+                    ->orWhere('id', 'LIKE', '%' . $term . '%');
+            })
+            ->where('deleted', 0)
+            ->get();
+
+            return $users;
+
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao buscar os usuários'], 500);
+        }
+
     }
 
     /**
@@ -52,16 +65,23 @@ class UsersLibraryController extends Controller
     public function store(UsersLibraryFormRequest $request)
     {
 
-        $existingUser = UsersLibrary::where('email', $request->email)->first();
+        try{
 
-        if ($existingUser) {
-            return response()->json(['error' => 'E-mail já cadastrado'], 400);
+            $existingUser = UsersLibrary::where('email', $request->email)->first();
+
+            if ($existingUser) {
+                return response()->json(['error' => 'E-mail já cadastrado'], 400);
+            }
+
+            // cria novo usuario
+
+            $user = UsersLibrary::create($request->all());
+            return $user;
+
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao criar o usuário'], 500);
         }
-
-        // cria novo usuario
-
-        $user = UsersLibrary::create($request->all());
-        return $user;
 
 
     }
@@ -76,8 +96,16 @@ class UsersLibraryController extends Controller
     {
         // returna um usuario
 
-        $user = UsersLibrary::findOrFail($id);
-        return $user;
+        try{
+
+            $user = UsersLibrary::findOrFail($id);
+
+            return $user;
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao buscar o usuário'], 500);
+        }
+
+
     }
 
     /**
@@ -89,15 +117,21 @@ class UsersLibraryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // atualiza um usuario
 
-        $user = UsersLibrary::findOrFail($id);
+        try{
+            // atualiza um usuario
 
-        $user->fill($request->all());
+            $user = UsersLibrary::findOrFail($id);
 
-        $user->save();
+            $user->fill($request->all());
 
-        return $user;
+            $user->save();
+
+            return $user;
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao atualizar o usuário'], 500);
+        }
+
     }
 
     /**
@@ -108,15 +142,21 @@ class UsersLibraryController extends Controller
      */
     public function destroy($id)
     {
-        // apaga um usuario com frag no banco
 
-        $user = UsersLibrary::findOrFail($id);
+        try{
+            // apaga um usuario com frag no banco
 
-        $user->deleted = 1;
+            $user = UsersLibrary::findOrFail($id);
 
-        $user->save();
+            $user->deleted = 1;
 
-        return $user;
+            $user->save();
+
+            return $user;
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao apagar o usuário'], 500);
+        }
+
 
     }
 }

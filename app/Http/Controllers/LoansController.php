@@ -17,11 +17,16 @@ class LoansController extends Controller
      */
     public function index()
     {
-        // busca todos os emprestimos
+        try{
+            // busca todos os emprestimos
+            $loans = Loans::all();
 
-        $loans = Loans::all();
+            return $loans;
+        }catch (\Exception $e) {
 
-        return $loans;
+            return response()->json(['error' => 'Erro ao buscar os emprestimos dos livros'], 500);
+        }
+
     }
 
 
@@ -34,48 +39,52 @@ class LoansController extends Controller
     public function store(LoansFormRequest $request)
     {
 
-        // verifica se usuario existe
+        try{
+              // verifica se usuario existe
 
-        $user = UsersLibrary::find($request->user_id);
+            $user = UsersLibrary::find($request->user_id);
 
-        if(!$user){
-            return response()->json(['error' => 'Usuário não encontrado'], 400);
+            if(!$user){
+                return response()->json(['error' => 'Usuário não encontrado'], 400);
+            }
+
+            // verifica se livro existe na base de dados
+
+            $book = Books::find($request->book_id);
+
+            if(!$book){
+                return response()->json(['error' => 'Livro não encontrado'], 400);
+            }
+
+            // verifica se o livro ja esta emprestado
+
+            $bookAvailable = Loans::where('book_id', $request->book_id)->where('date_returned', null)->first();
+
+            if($bookAvailable){
+                return response()->json(['error' => 'Livro já emprestado'], 400);
+            }
+
+            // valida se a data de devolução é maior que a data atual
+
+            $dateReturn = strtotime($request->date_return);
+
+            if($dateReturn < strtotime(date('Y-m-d')) ){
+                return response()->json(['error' => 'Data de devolução inválida'], 400);
+            }
+
+            // cria novo emprestimo
+            $loan = Loans::create([
+                'user_id' => $request->user_id,
+                'book_id' => $request->book_id,
+                'return_due_date' => $request->date_return
+            ]);
+            return $loan;
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao criar o emprestimo de livro'], 500);
         }
 
-        // verifica se livro existe na base de dados
 
-        $book = Books::find($request->book_id);
-
-        if(!$book){
-            return response()->json(['error' => 'Livro não encontrado'], 400);
-        }
-
-        // verifica se o livro ja esta emprestado
-
-        $bookAvailable = Loans::where('book_id', $request->book_id)->where('date_returned', null)->first();
-
-        if($bookAvailable){
-            return response()->json(['error' => 'Livro já emprestado'], 400);
-        }
-
-        // valida se a data de devolução é maior que a data atual
-
-
-
-        $dateReturn = strtotime($request->date_return);
-
-        if($dateReturn < strtotime(date('Y-m-d')) ){
-            return response()->json(['error' => 'Data de devolução inválida'], 400);
-        }
-
-        // cria novo emprestimo
-        $loan = Loans::create([
-            'user_id' => $request->user_id,
-            'book_id' => $request->book_id,
-            'return_due_date' => $request->date_return
-        ]);
-
-        return $loan;
     }
 
     /**
@@ -86,10 +95,16 @@ class LoansController extends Controller
      */
     public function show($id)
     {
-        // returna um emprestimo
-        $loan = Loans::findOrFail($id);
+        try{
+            // returna um emprestimo
+            $loan = Loans::findOrFail($id);
 
-        return $loan;
+            return $loan;
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Emprestimo de livro não encontrado'], 404);
+        }
+
     }
 
 
@@ -102,21 +117,29 @@ class LoansController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Busca o empréstimo do livro informado
-        $loan = Loans::where('book_id', $id)
-                    ->whereNull('date_returned')
-                    ->first();
 
-        // Verifica se o livro já foi devolvido
-        if (!$loan) {
+        try{
+             // Busca o empréstimo do livro informado
+            $loan = Loans::where('book_id', $id)
+            ->whereNull('date_returned')
+            ->first();
+
+            // Verifica se o livro já foi devolvido
+            if (!$loan) {
             return response()->json(['error' => 'Livro já devolvido'], 400);
+            }
+
+            $loan->update([
+            'date_returned' => date('Y-m-d')
+            ]);
+
+            return response()->json(['success' => 'Livro devolvido com sucesso'], 200);
+
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao devolver o livro'], 500);
         }
 
-        $loan->update([
-            'date_returned' => date('Y-m-d')
-        ]);
-
-        return response()->json(['success' => 'Livro devolvido com sucesso'], 200);
     }
 
 

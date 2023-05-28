@@ -16,28 +16,34 @@ class BooksController extends Controller
      */
     public function index()
     {
-        // busca todos os usuarios
+        try{
 
-        $books = Books::with('genres')->get()->sortBy('name');
+              // busca todos os usuarios
 
+            $books = Books::with('genres')->get()->sortBy('name');
 
-        foreach ($books as $book) {
-            // verifica se livro está emprestado.
+            foreach ($books as $book) {
+                // verifica se livro está emprestado.
 
-            $bookAvailable = Loans::where('book_id', $book->id)->where('date_returned', null)->first();
+                $bookAvailable = Loans::where('book_id', $book->id)->where('date_returned', null)->first();
 
-            if($bookAvailable){
-                $book->available = false;
-                $book->return_due_date = $bookAvailable->return_due_date;
+                if($bookAvailable){
+                    $book->available = false;
+                    $book->return_due_date = $bookAvailable->return_due_date;
 
-            }else{
-                $book->available = true;
+                }else{
+                    $book->available = true;
+                }
+
             }
 
+            return $books;
 
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao buscar os livros'], 500);
         }
 
-        return $books;
 
     }
 
@@ -48,10 +54,15 @@ class BooksController extends Controller
      */
     public function store(BooksFormRequest $request)
     {
-        // cria novo usuario
+        try{
+            // cria novo usuario
+            $books = Books::create($request->all());
+            return $books;
+        }catch (\Exception $e) {
 
-        $books = Books::create($request->all());
-        return $books;
+            return response()->json(['error' => 'Erro ao criar o livro'], 500);
+        }
+
 
 
     }
@@ -64,10 +75,17 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        // returna um usuario
 
-        $books = Books::findOrFail($id);
-        return $books;
+
+        try{
+            $books = Books::findOrFail($id);
+            return $books;
+
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Livro não encontrado'], 404);
+        }
+
     }
 
     /**
@@ -79,15 +97,22 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // atualiza um usuario
 
-        $books = Books::findOrFail($id);
+        try{
+            // atualiza um usuario
 
-        $books->fill($request->all());
+            $books = Books::findOrFail($id);
 
-        $books->save();
+            $books->fill($request->all());
 
-        return $books;
+            $books->save();
+
+            return $books;
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao atualizar o livro'], 500);
+        }
+
     }
 
     /**
@@ -98,15 +123,23 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        // apaga um usuario com frag no banco
 
-        $books = Books::findOrFail($id);
+        try{
+            // apaga um usuario com frag no banco
 
-        $books->deleted = 1;
+            $books = Books::findOrFail($id);
 
-        $books->save();
+            $books->deleted = 1;
 
-        return $books;
+            $books->save();
+
+            return $books;
+
+        }catch (\Exception $e) {
+
+            return response()->json(['error' => 'Erro ao atualizar o livro'], 500);
+        }
+
 
     }
 }
