@@ -1,0 +1,1498 @@
+{
+	"info": {
+		"_postman_id": "c24b4b9d-844a-44c9-8a72-c707f11a0c1d",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16095496"
+	},
+	"item": [
+		{
+			"name": "Usuarios da biblioteca",
+			"item": [
+				{
+					"name": "Buca usuarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user-library",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Buca usuarios",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/user-library",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:12:52 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:12:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Rafael\",\n        \"email\": \"rafael.cena@hotmail.com\",\n        \"deleted\": 1,\n        \"created_at\": \"2023-05-27T19:32:07.000000Z\",\n        \"updated_at\": \"2023-05-27T19:32:07.000000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Usuario teste\",\n        \"email\": \"rafael.cena@hotmail.com\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T12:53:34.000000Z\",\n        \"updated_at\": \"2023-05-28T12:53:34.000000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Rafael\",\n        \"email\": \"rafael.cena333@hotmail.com\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T14:55:50.000000Z\",\n        \"updated_at\": \"2023-05-28T14:55:50.000000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Rafael Bezerra Cena\",\n        \"email\": \"rafael.cena@hotmail.com2\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T14:58:56.000000Z\",\n        \"updated_at\": \"2023-05-28T14:58:56.000000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Buca usuarios por filtro",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user-library/filter/ra",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library",
+								"filter",
+								"ra"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Buca usuarios por filtro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/user-library/filter/ra",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library",
+										"filter",
+										"ra"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:05 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"name\": \"Usuario teste\",\n        \"email\": \"rafael.cena@hotmail.com\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T12:53:34.000000Z\",\n        \"updated_at\": \"2023-05-28T12:53:34.000000Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Rafael\",\n        \"email\": \"rafael.cena333@hotmail.com\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T14:55:50.000000Z\",\n        \"updated_at\": \"2023-05-28T14:55:50.000000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Rafael Bezerra Cena\",\n        \"email\": \"rafael.cena@hotmail.com2\",\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-28T14:58:56.000000Z\",\n        \"updated_at\": \"2023-05-28T14:58:56.000000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Cria usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rafael\",\r\n    \"email\": \"rafael.cena333@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user-library",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cria usuario",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rafael\",\r\n    \"email\": \"rafael.cena333@hotmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user-library",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:17 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"E-mail já cadastrado\"\n}"
+						},
+						{
+							"name": "Cria usuario",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rafael\",\r\n    \"email\": \"rafael.novo@hotmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user-library",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:34 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "56"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Rafael\",\n    \"email\": \"rafael.novo@hotmail.com\",\n    \"updated_at\": \"2023-05-28T15:13:34.000000Z\",\n    \"created_at\": \"2023-05-28T15:13:34.000000Z\",\n    \"id\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "Edita um usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rafael editado\",\r\n    \"email\": \"rafael.cenaeditado@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user-library/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edita um usuario",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rafael editado\",\r\n    \"email\": \"rafael.cenaeditado@hotmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user-library/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:42 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "55"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Rafael editado\",\n    \"email\": \"rafael.cenaeditado@hotmail.com\",\n    \"deleted\": 1,\n    \"created_at\": \"2023-05-27T19:32:07.000000Z\",\n    \"updated_at\": \"2023-05-28T15:13:42.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Apaga um usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user-library/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Apaga um usuario",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user-library/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:51 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:13:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "54"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Rafael editado\",\n    \"email\": \"rafael.cenaeditado@hotmail.com\",\n    \"deleted\": 1,\n    \"created_at\": \"2023-05-27T19:32:07.000000Z\",\n    \"updated_at\": \"2023-05-28T15:13:42.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retorna um usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user-library/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user-library",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retorna um usuario",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user-library/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user-library",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:01 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Rafael editado\",\n    \"email\": \"rafael.cenaeditado@hotmail.com\",\n    \"deleted\": 1,\n    \"created_at\": \"2023-05-27T19:32:07.000000Z\",\n    \"updated_at\": \"2023-05-28T15:13:42.000000Z\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Livros",
+			"item": [
+				{
+					"name": "Busca livros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/books",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Busca livros",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/books",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"books"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:08 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"title\": \"Arquiterura limpa2\",\n        \"author\": \"R Martin\",\n        \"genre_id\": 1,\n        \"deleted\": 0,\n        \"created_at\": \"2023-05-27T19:32:56.000000Z\",\n        \"updated_at\": \"2023-05-27T20:53:46.000000Z\",\n        \"available\": true,\n        \"genres\": {\n            \"id\": 1,\n            \"name\": \"Ficção\"\n        }\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Livro 2\",\n        \"author\": \"Autor 2\",\n        \"genre_id\": 3,\n        \"deleted\": 1,\n        \"created_at\": \"2023-05-27T20:36:25.000000Z\",\n        \"updated_at\": \"2023-05-27T20:39:09.000000Z\",\n        \"available\": true,\n        \"genres\": {\n            \"id\": 3,\n            \"name\": \"Mistério\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Cria livro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Arquiterura limpa\",\r\n    \"author\": \"R Martin\",\r\n    \"genre_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/books",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cria livro",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Arquiterura limpa\",\r\n    \"author\": \"R Martin\",\r\n    \"genre_id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/books",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"books"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:17 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"Arquiterura limpa\",\n    \"author\": \"R Martin\",\n    \"genre_id\": 1,\n    \"updated_at\": \"2023-05-28T15:14:17.000000Z\",\n    \"created_at\": \"2023-05-28T15:14:17.000000Z\",\n    \"id\": 4\n}"
+						}
+					]
+				},
+				{
+					"name": "Edita um livro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Arquiterura limpa 2ª edit\",\r\n    \"author\": \"R Martin\",\r\n    \"genre_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/books/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edita um livro",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Arquiterura limpa 2ª edit\",\r\n    \"author\": \"R Martin\",\r\n    \"genre_id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/books/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:36 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:14:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "55"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Arquiterura limpa 2ª edit\",\n    \"author\": \"R Martin\",\n    \"genre_id\": 1,\n    \"deleted\": 0,\n    \"created_at\": \"2023-05-27T19:32:56.000000Z\",\n    \"updated_at\": \"2023-05-28T15:14:36.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Apaga um livro",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/books/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Apaga um livro",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/books/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:18:53 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:18:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Arquiterura limpa 2ª edit\",\n    \"author\": \"R Martin\",\n    \"genre_id\": 1,\n    \"deleted\": 1,\n    \"created_at\": \"2023-05-27T19:32:56.000000Z\",\n    \"updated_at\": \"2023-05-28T15:18:53.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retorna um livro",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/books/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Retorna um livro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/books/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"books",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:18:45 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:18:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "56"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Arquiterura limpa 2ª edit\",\n    \"author\": \"R Martin\",\n    \"genre_id\": 1,\n    \"deleted\": 0,\n    \"created_at\": \"2023-05-27T19:32:56.000000Z\",\n    \"updated_at\": \"2023-05-28T15:14:36.000000Z\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Emprestimo de livros",
+			"item": [
+				{
+					"name": "Emprestar um livro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 3,\r\n    \"book_id\": 2,\r\n    \"date_return\": \"2023-05-28\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loans",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loans"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Emprestar um livro",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": 1,\r\n    \"book_id\": 2,\r\n    \"date_return\": \"2023-05-28\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/loans",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"loans"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:19:09 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 May 2023 15:19:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.25"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user_id\": 1,\n    \"book_id\": 2,\n    \"return_due_date\": \"2023-05-28\",\n    \"updated_at\": \"2023-05-28T15:19:09.000000Z\",\n    \"created_at\": \"2023-05-28T15:19:09.000000Z\",\n    \"id\": 8\n}"
+						}
+					]
+				},
+				{
+					"name": "Retorna todos os emprestimos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loans",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Devolve um livro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loans/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
