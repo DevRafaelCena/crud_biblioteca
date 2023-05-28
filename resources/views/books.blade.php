@@ -148,7 +148,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-
+var authorizationToken = "SADSDFDFD@!45545t3dDFFDSFSDFDF";
 $(document).ready(function() {
     $('#tbl_books').DataTable({
     language: {
@@ -160,6 +160,9 @@ $(document).ready(function() {
             $.ajax({
             url: '{{ route('books.index') }}',
             method: 'GET',
+            headers: {
+                'Authorization': authorizationToken
+            },
             success: function(response) {
             var table = $('#tbl_books').DataTable();
 
@@ -235,7 +238,8 @@ $(document).ready(function() {
         url: '{{ route('books.store') }}',
         method: 'POST',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
         },
         data: data,
         success: function(response) {
@@ -265,6 +269,9 @@ $(document).ready(function() {
         $.ajax({
             url: 'api/books/' + bookID ,
             method: 'GET',
+            headers: {
+                'Authorization': authorizationToken
+            },
             success: function(response) {
                 console.log(response);
 
@@ -310,7 +317,8 @@ $(document).ready(function() {
         url: 'api/books/' + bookId,
         method: 'PUT',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
         },
         data: data,
         success: function(response) {
@@ -348,6 +356,10 @@ function excluirLivro(bookId) {
       $.ajax({
         url: 'api/books/' + bookId,
         method: 'DELETE',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
+        },
         success: function(response) {
           // Exibir mensagem de sucesso
           Swal.fire({
@@ -389,6 +401,10 @@ function devolverLivro(bookId) {
       $.ajax({
         url: 'api/loans/' + bookId,
         method: 'PUT',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
+        },
         success: function(response) {
           // Exibir mensagem de sucesso
           Swal.fire({
@@ -439,6 +455,10 @@ function buscarUsuarios() {
     $.ajax({
         url: '/api/user-library/filter/'+ termo, // URL da sua API de busca de usuários
         method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Authorization': authorizationToken
+        },
         success: function(response) {
              // Limpa o select existente
              var selectUsuarios = '<select class="form-control" id="selectUsuarios"><option value="">Selecione um usuário</option>';
@@ -490,7 +510,8 @@ function emprestarLivro(){
             url: '/api/loans',
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': authorizationToken
             },
             data: data,
             success: function(response) {

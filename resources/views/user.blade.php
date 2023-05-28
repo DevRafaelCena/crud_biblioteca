@@ -85,7 +85,15 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
   <script>
+    var authorizationToken = "SADSDFDFD@!45545t3dDFFDSFSDFDF";
+
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
     $(document).ready(function() {
       $('#tbl_usuarios').DataTable({
         language: {
@@ -97,6 +105,9 @@
             $.ajax({
             url: '{{ route('user-library.index') }}',
             method: 'GET',
+            headers: {
+                'Authorization': authorizationToken
+            },
             success: function(response) {
             var table = $('#tbl_usuarios').DataTable();
 
@@ -134,6 +145,24 @@
     var name = $('#name').val();
     var email = $('#email').val();
 
+    if(name == '' || email == '') {
+        Swal.fire({
+        title: 'Ocorreu um erro!',
+        html: 'Preencha todos os campos obrigatórios',
+        icon: 'error'
+        });
+        return;
+    }
+
+    if(!validateEmail(email)) {
+        Swal.fire({
+        title: 'Ocorreu um erro!',
+        html: 'Email inválido',
+        icon: 'error'
+        });
+        return;
+    }
+
     var data = {
         name: name,
         email: email
@@ -143,7 +172,8 @@
         url: '{{ route('user-library.store') }}',
         method: 'POST',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
         },
         data: data,
         success: function(response) {
@@ -182,6 +212,10 @@
         $.ajax({
             url: 'api/user-library/' + usuarioID ,
             method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': authorizationToken
+            },
             success: function(response) {
                 console.log(response);
 
@@ -216,7 +250,8 @@
         url: 'api/user-library/' + usuarioId,
         method: 'PUT',
         headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Authorization': authorizationToken
         },
         data: data,
         success: function(response) {
@@ -255,6 +290,10 @@
         $.ajax({
             url: 'api/user-library/' + userId,
             method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': authorizationToken
+            },
             success: function(response) {
             // Exibir mensagem de sucesso
             Swal.fire({
